@@ -11,7 +11,7 @@ Setup the Moments web application, and containerize the application using Docker
 
 ---
 
-## Part 1: Set Up Albumy Locally
+## Part 1: Set Up Moments Locally
 
 ```bash
 # Clone Moments and cd into the repository
