@@ -10,14 +10,14 @@ In this group project, you will enhance an existing web application with feature
 * Reflect on user experience and risks introduced by ML components
 * Develop awareness of issues such as explainability, fairness, and operational concerns
 
-**A word on scope and difficulty:** You’ll work with an existing web application, [Moments](https://github.com/greyli/moments), a minimal Instagram clone built with Flask. Users can create accounts, upload and tag images, and comment on them. While the application is small, the codebase is non-trivial and uses multiple technologies: Flask, HTML templates, SQLAlchemy, wtforms, and pip-based dependency management.
+**A word on scope and difficulty:** You’ll work with an existing web application, [Moments](https://github.com/jspieler/moments-mle), a minimal Instagram clone built with Flask. Users can create accounts, upload and tag images, and comment on them. While the application is small, the codebase is non-trivial and uses multiple technologies: Flask, HTML templates, SQLAlchemy, wtforms, and pip-based dependency management.
 
 We do not expect you to know all of these technologies already. You’ll learn by reading documentation, tutorials, and examples—just like professionals do when integrating ML into production systems. Even if the final code change is small, navigating and understanding where and how to make those changes is a core part of the learning experience.
 
-This project consists of multiple tasks and a final report, which add up to a total of 36 points. Beyond that, the project is intentionally open-ended. You’ll implement three core features with minimal code, but high design impact. You can achieve full credit with a minimal implementation, as long as you identify its limitations and reflect on how it could be improved. You're also encouraged to go further if you want to experiment, explore better integrations, or apply advanced ideas.
+This project consists of multiple tasks and a final report, which add up to a total of 32 points. Beyond that, the project is intentionally open-ended. You’ll implement three core features with minimal code, but high design impact. You can achieve full credit with a minimal implementation, as long as you identify its limitations and reflect on how it could be improved. You're also encouraged to go further if you want to experiment, explore better integrations, or apply advanced ideas.
 
 ## Tasks
-In this assignment, you will use advances in machine learning for vision to improve accessibility and image search in an open source project named [Moments](https://github.com/greyli/moments). Moments is a demo implementation of a minimal Instagram clone in Python, created as example for a book on the flask library for Python. Users can create accounts and upload and share images, describe and tag images, and comment on images. While Moments is not a polished end-user product, it is a reasonable stand-in for a software product that may be used by end users while still having a reasonably small codebase. Moments does not currently use machine learning for any of its functionality.
+In this assignment, you will use advances in machine learning for vision to improve accessibility and image search in an open source project named [Moments](https://github.com/jspieler/moments-mle). Moments is a demo implementation of a minimal Instagram clone in Python, created as example for a book on the flask library for Python. Users can create accounts and upload and share images, describe and tag images, and comment on images. While Moments is not a polished end-user product, it is a reasonable stand-in for a software product that may be used by end users while still having a reasonably small codebase. Moments does not currently use machine learning for any of its functionality.
 
 Change the open source project to introduce at a minimum the following **three** features:
 
@@ -27,7 +27,14 @@ Change the open source project to introduce at a minimum the following **three**
 
 You can use any existing ML models as part of your implementation, research or free or paid, remote APIs or local pretrained models. We do **not** recommend to train your own model.
 
-### Task 1: Planning & Design
+## Task 1: Assess what you inherited
+The codebase already contains an ML-based quality gate. Before extending anything, decide whether the quality gate should be running.
+
+* Review the data, the notebook and the integration in `moments/features/quality.py` for anything that would make you doubt the reported result or the component's behavior in production. 
+* Document each finding by what you observed, why it matters, how you identified or measured it and what you did to mitigate it.
+* Recommend whether the feature should be kept unchanged, changed or switched off. Justify your decision based on your findings.
+
+### Task 2: Planning & Design
 * Define how ML features will be integrated (diagram + explanation).
 * UI decisions: Will alt-text be editable? When is it generated? How are tags stored?
 * Identify at least three potential risks introduced by your features.
@@ -35,7 +42,7 @@ You can use any existing ML models as part of your implementation, research or f
   * What product benefit does each ML feature provide?
   * Where does ML sit in the system? What are its dependencies?
 
-### Task 2: Model Integration
+### Task 3: Model Integration
 * Implement alt-text generation.
 * Implement keyword tagging using object detection or zero-shot classification.
 * Implement one other ML-enabled feature of your choice from which Moments could benefit.
@@ -45,9 +52,9 @@ You can use any existing ML models as part of your implementation, research or f
   * What input/output formats do you use?
   * Are the models robust across different input types?
  
-### Task 3: Responsible ML
+### Task 4: Responsible ML
 * Evaluate how the system performs across different types of users or content for at least one feature (e.g., skin tone detection bias, stereotypes in captions).
-* Include a basic audit of fairness/harms by identifying at least one harm for one feature, with one potential mitigation strategy.
+* Include a basic audit of fairness/harms by identifying at least one concrete harm for one feature, with one potential mitigation strategy. Attempt a mitigation for one concrete identified harm.
 * Offer a way for users to report/override model output.
 * Answer following questions:
   * What kind of errors does your model make?
@@ -58,7 +65,7 @@ You can use any existing ML models as part of your implementation, research or f
     * limitations of the model itself, or
     * limitations of your integration.
  
-### Task 4: Deployment & MLOps
+### Task 5: Deployment & MLOps
 * Describe how the system would scale (e.g., batching uploads, caching embeddings).
 * Decide whether to use APIs (e.g., Replicate, HuggingFace Inference API) or run models locally.
 * Include an example of monitoring or logging.
@@ -68,14 +75,15 @@ You can use any existing ML models as part of your implementation, research or f
   * How would you update or replace your model?
 
 ## Submission
-Commit all your code changes to your team's GitHub repository, but do not commit private credentials. Update instructions to install and run the system in the `README.md` file as necessary. For example, explain how to get an API token if needed or add additional libraries to `requirements.txt`.
+Commit all your code changes to your team's GitHub repository (private, add `jspieler`), but do not commit private credentials. Update instructions to install and run the system in the `README.md` file as necessary. For example, explain how to get an API token if needed or add additional libraries to `requirements.txt`.
 
 Additionally, upload a short report to Moodle with the following content which also answers the questions of each task described before:
 
 * **Github link:** Start the document with a link to your team's Github repository and the names of the team members.
-* **Technical description (1 page max):** Briefly describe how you implemented the three features.
+* **Audit (1 page max):** Report the findings of your assessment of the quality gate following the proposed form and supported by evidence. Provide recommendations for mitigations based on your findings.
+* **Technical description (1 page max):** Briefly describe how you implemented the other three features.
 * **User interface design approach (1 page max):** Describe for each of the three features how the feature should interact with users (automate, prompt, organize, annotate, hybrid) and why. Justify your decision, considering forcefulness, frequency, value, and cost. If your implementation differs from the proposed approach, briefly explain how you would change your implementation if you had more time.
-* **Harms (1 page max):** Discuss what possible harms you can anticipate from using machine learning for the features in the applications (e.g., safety, fairness). Identify at least one harm and discuss potential solutions to mitigate the harm. (You do **not** need to implement the solutions.)
+* **Harms (1 page max):** Discuss what possible harms you can anticipate from using machine learning for the features in the applications (e.g., safety, fairness). Identify at least one concrete harm and discuss potential solutions to mitigate the harm. Attempt a mitigation for one harm.
 * **Production challenges (1 page max):** Discuss any technical challenges you anticipate if you want to deploy this feature in production (e.g., scalability, operating costs) and how you would change your implementation if you expected millions of users. Identify at least one problem and discuss corresponding potential solutions. (You do **not** need to implement the solutions.)
 
 Make sure your document is clearly structured, such that it is recognizable which answer belongs to which question.
@@ -89,18 +97,18 @@ Your discussions may reveal limitations of your implementation and make suggesti
 ## Grading
 **Important:** Please read the grading specifications carefully. 
 
-The project is worth **36 points** in total. We will assign credit as follows:
+The project is worth **32 points** in total. We will assign credit as follows:
 
-* 4p: The document is clearly structured, such that it is clear which text belongs to which question.
-* 4p: We can install and run your implementation based on the descriptions in the README.md file (including instructions for dependencies and API credentials if needed).
-* 2p: Most commits (>60%) are reasonably cohesive and contain reasonable commit messages. The code is generally reasonably well structured and understandable.
-* 1p: No private credentials are committed to the GitHub repository, including its history.
-* 3p: The document describes how alternative text generation is implemented, and we can find the corresponding implementation. A machine-learned model was used in the implementation. The application is functional in that it produces HTML with alt attributes containing alternative text for all images uploaded by users (excluding profile pictures). The alternative text is automatically generated by an ML model unless the alternative text is manually provided by the user.
-* 3p: The document describes how image search is implemented, and we can find the corresponding implementation. A machine-learned model was used in the implementation. The application is functional to search for images uploaded by users with keywords that are matched objects in those images.
+* 1p: The document is clearly structured, such that it is clear which text belongs to which question.
+* 2p: We can install and run your implementation based on the descriptions in the README.md file (including instructions for dependencies and API credentials if needed).
+* 3p: Most commits (>60%) are reasonably cohesive and contain reasonable commit messages. The code is generally reasonably well-structured and understandable. No private credentials are committed to the **private** GitHub repository, including its history.
+* 7p: The document describes your findings of the quality gate audit, supported by evidence and provides recommendations for mitigations based on the findings.
+* 2p: The document describes how alternative text generation is implemented, and we can find the corresponding implementation. A machine-learned model was used in the implementation. The application is functional in that it produces HTML with alt attributes containing alternative text for all images uploaded by users (excluding profile pictures). The alternative text is automatically generated by an ML model unless the alternative text is manually provided by the user.
+* 2p: The document describes how image search is implemented, and we can find the corresponding implementation. A machine-learned model was used in the implementation. The application is functional to search for images uploaded by users with keywords that are matched objects in those images.
 * 3p: The document describes why and how the third feature of your choice is implemented, and we can find the corresponding implementation. A machine-learned model was used in the implementation. The feature is functional.
-* 4p: The document makes plausible recommendations of how to design the user interaction for the three new features. The recommendation is justified, and the justification considers forcefulness, frequency, value, and cost.
-* 6p: The document makes a good faith attempt at discussing at least one possible harm. The discussion focuses on application-level concerns and the user experience. At least one potential harm with the current implementation is identified. At least one potential solution is discussed for each harm. All discussed harms and solutions are plausible in the context of the application.
-* 6p: The document makes a good faith attempt at discussing production challenges. The discussion focuses on production issues such as scalability or operation costs. At least one potential problem with the current implementation is identified. At least one potential solution is discussed for each identified problem. All discussed problems and solutions are plausible in the context of the application.
+* 3p: The document makes plausible recommendations of how to design the user interaction for the three new features. The recommendation is justified, and the justification considers forcefulness, frequency, value, and cost.
+* 6p: The document makes a good faith attempt at discussing at least one possible harm. The discussion focuses on application-level concerns and the user experience. At least one potential harm with the current implementation is identified. At least one potential solution is discussed for each harm. All discussed harms and solutions are plausible in the context of the application. A mitigation for one concrete harm is attempted.
+* 3p: The document makes a good faith attempt at discussing production challenges. The discussion focuses on production issues such as scalability or operation costs. At least one potential problem with the current implementation is identified. At least one potential solution is discussed for each identified problem. All discussed problems and solutions are plausible in the context of the application.
 
 ## Technical Hints
 Current browsers do not usually show the alternative text by default, not even as tool tip. There are several browser plugins and screen readers that can highlight them or you can simply inspect the produced HTML source.
