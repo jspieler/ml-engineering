@@ -17,7 +17,9 @@ We do not expect you to know all of these technologies already. You’ll learn b
 This project consists of multiple tasks and a final report, which add up to a total of 32 points. Beyond that, the project is intentionally open-ended. You’ll implement three core features with minimal code, but high design impact. You can achieve full credit with a minimal implementation, as long as you identify its limitations and reflect on how it could be improved. You're also encouraged to go further if you want to experiment, explore better integrations, or apply advanced ideas.
 
 ## Tasks
-In this assignment, you will use advances in machine learning for vision to improve accessibility and image search in an open source project named [Moments](https://github.com/jspieler/moments-mle). Moments is a demo implementation of a minimal Instagram clone in Python, created as example for a book on the flask library for Python. Users can create accounts and upload and share images, describe and tag images, and comment on images. While Moments is not a polished end-user product, it is a reasonable stand-in for a software product that may be used by end users while still having a reasonably small codebase. Moments does not currently use machine learning for any of its functionality.
+In this assignment, you will use advances in machine learning for vision to improve accessibility and image search in an open source project named [Moments](https://github.com/jspieler/moments-mle). Moments is a demo implementation of a minimal Instagram clone in Python, created as example for a book on the flask library for Python. Users can create accounts and upload and share images, describe and tag images, and comment on images. While Moments is not a polished end-user product, it is a reasonable stand-in for a software product that may be used by end users while still having a reasonably small codebase. 
+
+Moments already contains one ML-based component. A working student added a photo quality gate that blocks uploads that are considered too dark or blurry. Before adding anything, decide whether it should be running. Document your findings with evidence.
 
 Change the open source project to introduce at a minimum the following **three** features:
 
@@ -28,10 +30,10 @@ Change the open source project to introduce at a minimum the following **three**
 You can use any existing ML models as part of your implementation, research or free or paid, remote APIs or local pretrained models. We do **not** recommend to train your own model.
 
 ## Task 1: Assess what you inherited
-The codebase already contains an ML-based quality gate. Before extending anything, decide whether the quality gate should be running.
+The codebase already contains an ML-based quality gate. Before extending anything, try it and decide whether the quality gate should be running.
 
-* Review the data, the notebook and the integration in `moments/features/quality.py` for anything that would make you doubt the reported result or the component's behavior in production. 
-* Document each finding by what you observed, why it matters, how you identified or measured it and what you did to mitigate it.
+* Review the data, the notebook in `handover/` and the integration in `moments/features/quality.py` for anything that would make you doubt the reported result or the component's behavior in production. 
+* Document each finding by what you observed, why it matters, how you identified or measured it and what you did to mitigate it. There are several problems known, and your grade depends on what you find and how you provide evidence for them. 
 * Recommend whether the feature should be kept unchanged, changed or switched off. Justify your decision based on your findings.
 
 ### Task 2: Planning & Design
